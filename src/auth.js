@@ -1,10 +1,10 @@
-import prisma from "./lib/db";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextResponse } from "next/server";
+import prisma from "./lib/db";
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   session: {

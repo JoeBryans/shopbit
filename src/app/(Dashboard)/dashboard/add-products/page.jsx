@@ -1,4 +1,3 @@
-
 import NavBar from "../_components/headers/NavBar";
 import Category from "../_components/Forms/addProduct/category";
 import { NewProduct } from "../_components/Forms/addProduct/newProduct";

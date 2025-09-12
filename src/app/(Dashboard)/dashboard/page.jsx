@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 
 const page = () => {
-  return <Container>Dashboard</Container>;
+  return <div>Dashboard</div>;
 };
 export default page;
