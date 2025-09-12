@@ -1,5 +1,3 @@
-import Container from "@/components/Container";
-
 const page = () => {
   return <div>Dashboard</div>;
 };
