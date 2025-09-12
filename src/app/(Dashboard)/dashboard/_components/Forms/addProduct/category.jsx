@@ -8,17 +8,18 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import * as yup from "yup";
 import { toast } from "sonner";
-import { CreateCategory } from "@/action/category";
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
+import { CreateCategory } from "@/actions/category";
 
 const Schema = z.object({
     name: z.string().min(2, {

@@ -1,11 +1,6 @@
 import React from "react";
-import Searchs from "@/components/headers/Search";
-import { CartBar } from "@/components/headers/cartbar";
-import GetUser from "@/components/headers/GetUser";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import * as FaIcons from "react-icons/fa";
-import { Input } from "@/components/ui/input";
 import Search from "./Search";
 const NavBar = ({ label, href, seachBar }) => {
   const items = [

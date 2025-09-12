@@ -3,7 +3,6 @@ import { Camera, Loader2, PlusIcon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -28,9 +27,9 @@ import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
 
 import { useRouter } from "next/navigation";
-import { cloudinaryLoader } from "next-cloudinary";
-import { GetCategory } from "@/action/category";
-import CloudUploadButton from "@/components/headers/CloudButton";
+
+import { GetCategory } from "@/actions/category";
+import CloudUploadButton from "./CloudButton";
 import dynamic from "next/dynamic";
 import 'react-quill-new/dist/quill.snow.css';
 import { AddInfo, Sizes } from "./AddInfo";
