@@ -5,7 +5,7 @@ import React from 'react'
 
 const PopularCard = async () => {
 
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/latest`);
   console.log("data :", res);
   const Latest = await res.json();
   console.log("Latest :", Latest);
@@ -153,7 +153,7 @@ const PopularCard = async () => {
                   <CardContent key={product.id}
                     className={"w-48 flex flex-col items-start py-2 px-1 "}
                   >
-                    <Link href={`/product/category/${product.category.name}`} className='w-full'>
+                    <Link href={`/product/category/${encodeURI(product.category.name)}`} className='w-full'>
                       <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
                         className='w-full h-44 object-cover'
                       />
