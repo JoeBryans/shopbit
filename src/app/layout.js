@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
      <Providers>
       <Session>
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
           > <NavBar />
             <Toaster richColors position="top-right" />
             <main className="min-h-[100vh] w-full overflow-x-auto scrollbar-hide">

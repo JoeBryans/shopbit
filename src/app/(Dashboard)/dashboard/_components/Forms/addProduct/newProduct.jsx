@@ -28,19 +28,18 @@ import { toast, Toaster } from "sonner";
 
 import { useRouter } from "next/navigation";
 
-import { GetCategory } from "@/actions/category";
 import CloudUploadButton from "./CloudButton";
 import dynamic from "next/dynamic";
 import 'react-quill-new/dist/quill.snow.css';
 import { AddInfo, Sizes } from "./AddInfo";
+import Loader from "../../Loader";
+import { GetCategory } from "@/actions/category";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
     ssr: false,
 
     loading: () => (
-        <p className="bg-black/30">
-            Loading...
-        </p>
+        <div> <Loader isLoading={true} /></div>
     ),
 });
 
@@ -177,9 +176,13 @@ export function NewProduct() {
     };
     // get categories
     useEffect(() => {
-        GetCategory().then((res) => {
+        async function getCategory() {
+            const res = await GetCategory();
+            console.log(res);
             setCategory(res);
-        });
+        }
+        getCategory();
+   
     }, []);
     // set additional info
     useEffect(() => {
@@ -313,11 +316,11 @@ export function NewProduct() {
                                                     <SelectContent className="">
                                                         <SelectGroup>
                                                             <SelectLabel>Categories</SelectLabel>
-                                                            {category?.map((item, index) => (
+                                                            {category.length > 0 && (category?.map((item, index) => (
                                                                 <SelectItem value={item.id} key={index}>
                                                                     {item.name}
                                                                 </SelectItem>
-                                                            ))}
+                                                            )))}
                                                         </SelectGroup>
                                                     </SelectContent>
                                                 </Select>

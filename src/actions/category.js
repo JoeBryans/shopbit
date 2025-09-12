@@ -15,7 +15,7 @@ export async function CreateCategory(data) {
                 slug: slug,
             }
         });
-        revalidatePath("/add-product");
+        revalidatePath("/add-products");
         return { message: "Category created successfully", category, ok: true };
     } catch (error) {
         console.log(error);
