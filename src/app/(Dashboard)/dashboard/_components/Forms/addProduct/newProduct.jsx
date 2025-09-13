@@ -177,12 +177,15 @@ export function NewProduct() {
     // get categories
     useEffect(() => {
         async function FetchCategory() {
-            const res = await GetCategory();
-            console.log(res);
-            setCategory(res);
+            const res = await fetch("/api/category", {
+                method: "GET",
+            });
+            const resData = await res.json();
+            // console.log(resData);
+            setCategory(resData);
         }
         FetchCategory();
-   
+
     }, []);
     // set additional info
     useEffect(() => {
