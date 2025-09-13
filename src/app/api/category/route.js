@@ -1,7 +1,7 @@
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
-export async function CreateCategory(req) {
+export async function POST(req) {
     const { name, slug } = req.json();
     try {
         const category = await prisma.category.create({
@@ -19,7 +19,7 @@ export async function CreateCategory(req) {
     }
 }
 
-export async function GetCategory(req) {
+export async function GET(req) {
     try {
         const category = await prisma.category.findMany();
         return NextResponse.json(category);

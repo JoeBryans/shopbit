@@ -24,7 +24,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
 
@@ -33,8 +33,6 @@ import dynamic from "next/dynamic";
 import 'react-quill-new/dist/quill.snow.css';
 import { AddInfo, Sizes } from "./AddInfo";
 import Loader from "../../Loader";
-import { GetCategory } from "@/actions/category";
-
 const ReactQuill = dynamic(() => import("react-quill-new"), {
     ssr: false,
 
@@ -177,9 +175,7 @@ export function NewProduct() {
     // get categories
     useEffect(() => {
         async function FetchCategory() {
-            const res = await fetch("/api/category", {
-                method: "GET",
-            });
+            const res = await fetch("/api/category");
             const resData = await res.json();
             // console.log(resData);
             setCategory(resData);

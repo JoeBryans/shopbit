@@ -19,7 +19,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
-import { CreateCategory } from "@/actions/category";
 
 const Schema = z.object({
     name: z.string().min(2, {
@@ -42,7 +41,14 @@ const Category = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const res = await CreateCategory(data);
+            const res = await fetch("/api/category", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // "Accept": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
             console.log(res);
 
             if (res?.ok) {
