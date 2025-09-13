@@ -77,9 +77,9 @@ export async function POST(req) {
             ok: false,
         });
     }
-}
+};
 
-export async function GET() {
+export async function GET(req) {
     try {
         const product = await prisma.product.findMany(
             {
@@ -110,10 +110,11 @@ export async function GET() {
                     createdAt: 'desc',
                 }
             }
-
         );
         return NextResponse.json(product);
     } catch (error) {
+        console.log(error);
+
         return NextResponse.json({ message: "something went wrong  ", error });
     }
 }

@@ -1,15 +1,14 @@
 import { Card, CardContent } from '@/components/ui/card'
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const PopularCard = async () => {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
   });
-  console.log("data :", res);
-  const Latest = await res.json();
-  console.log("Latest :", Latest);
+  const Latest = res?.data
 
   const productCard = [
     {
@@ -149,7 +148,7 @@ const PopularCard = async () => {
           <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
             <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
 
-              {Latest.map((product) => {
+              {Latest.length > 0 && (Latest?.map((product) => {
                 return (
                   <CardContent key={product.id}
                     className={"w-48 flex flex-col items-start py-2 px-1 "}
@@ -167,7 +166,7 @@ const PopularCard = async () => {
 
 
 
-              )}
+              ))}
             </div>
           </Card>
         </div>
