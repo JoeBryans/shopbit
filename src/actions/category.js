@@ -4,10 +4,6 @@ import { revalidatePath } from "next/cache";
 
 export async function CreateCategory(data) {
     const { name, slug } = data;
-    console.log(data);
-
-
-
     try {
         const category = await prisma.category.create({
             data: {
@@ -20,7 +16,7 @@ export async function CreateCategory(data) {
     } catch (error) {
         console.log(error);
 
-        return { message: "Category not created", error, ok: false };
+        return { message: "Category not created", error:error?.message, ok: false };
     }
 }
 
