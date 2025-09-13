@@ -36,6 +36,7 @@ export default function CardCarousel() {
                     <CarouselItem key={index}>
                         <div className="p-1 w-full max-h-[100vh]">
                             <Image src={_} alt="product" width={1000} height={1000}
+                                priority={true}
                                 className="w-full object-cover rounded-md"
                             />
                         </div>

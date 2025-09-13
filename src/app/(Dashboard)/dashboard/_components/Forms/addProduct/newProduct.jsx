@@ -176,12 +176,12 @@ export function NewProduct() {
     };
     // get categories
     useEffect(() => {
-        async function getCategory() {
+        async function FetchCategory() {
             const res = await GetCategory();
             console.log(res);
             setCategory(res);
         }
-        getCategory();
+        FetchCategory();
    
     }, []);
     // set additional info

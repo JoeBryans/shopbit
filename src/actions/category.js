@@ -23,11 +23,9 @@ export async function CreateCategory(data) {
 export async function GetCategory() {
     try {
         const category = await prisma.category.findMany();
-
         return category;
     } catch (error) {
         console.log(error);
-
         return error;
     }
 }
