@@ -5,8 +5,7 @@ import React from 'react'
 
 const PopularCard = async () => {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`,{
-    cache: 'no-store',
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
   });
   console.log("data :", res);
   const Latest = await res.json();
