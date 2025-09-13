@@ -43,6 +43,8 @@ const Category = () => {
         try {
             setLoading(true)
             const res = await CreateCategory(data);
+            console.log(res);
+
             if (res?.ok) {
                 setLoading(false)
                 toast.success("Category created successfully");
