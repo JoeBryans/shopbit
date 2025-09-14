@@ -15,22 +15,23 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  email     String    @unique
-  name      String
-  image     String?
-  role      String    @default("user")
-  phone     String
-  password  String
-  accounts  Account[]
-  products  Product[]
-  sessions  Session[]
-  cart      Carts[]
-  orders    Order[]
-  address   Address[]
-  payment   Payment[]
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  email       String       @unique
+  name        String
+  image       String?
+  role        String       @default("user")
+  phone       String
+  password    String
+  accounts    Account[]
+  products    Product[]
+  sessions    Session[]
+  cartItems   CartItems[]
+  orders      Order[]
+  address     Address[]
+  payment     Payment[]
+  recentViews RecentView[]
 }
 
 model Account {
@@ -101,6 +102,7 @@ model Product {
   updatedAt      DateTime         @updatedAt
   userId         String           @db.ObjectId
   user           User             @relation(fields: [userId], references: [id])
+  recentViews    RecentView[]
 
   @@index([categoryId, name, price])
   @@index([size, sku])
@@ -143,6 +145,15 @@ model Deals {
   updatedAt DateTime @updatedAt
 }
 
+model RecentView {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId String   @db.ObjectId
+  userId    String   @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
 model Review {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   productId String   @db.ObjectId
@@ -179,21 +190,16 @@ model OrderItem {
   updatedAt DateTime @updatedAt
 }
 
-model Carts {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String      @db.ObjectId
-  users     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  cartItems CartItems[]
-}
-
 model CartItems {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   productId  String  @db.ObjectId
   product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String  @db.ObjectId
+  users      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   quantity   Int
   totalPrice Int
-  cartId     String  @db.ObjectId
-  cart       Carts   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId])
 }
 
 model Address {

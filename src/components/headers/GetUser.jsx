@@ -27,10 +27,8 @@ import Image from "next/image";
 const GetUser = ({ role }) => {
   const { data, status } = useSession();
   const path = usePathname();
-  console.log(path);
   const start = path.startsWith("/dashboard");
   const user = data?.user;
-  console.log(user);
 
   if (user) {
     return (

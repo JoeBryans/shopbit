@@ -1,5 +1,5 @@
 import Hero from "@/components/headers/Hero/Hero";
-import PopularCard from "../components/product/PopularCard";
+import PopularCard from "./(root)/_components/product/PopularCard";
 import { Suspense } from "react";
 
 export default function Home() {

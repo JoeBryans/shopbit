@@ -59,7 +59,7 @@ const SignIn = () => {
       console.log(res);
       if (!res?.ok) {
         setIsLoading(false);
-        toast.error(error?.message);
+        toast.error("wrong email or password !");
       } else {
         setIsLoading(false);
         toast.success("user signed in ");

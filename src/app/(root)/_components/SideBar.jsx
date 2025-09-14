@@ -1,4 +1,4 @@
-import { Sidebar, SidebarContent, SidebarHeader, SidebarMenuButton } from './ui/sidebar'
+import { Sidebar, SidebarContent, SidebarHeader, SidebarMenuButton } from '../../../components/ui/sidebar'
 import Link from 'next/link'
 import React from 'react'
 

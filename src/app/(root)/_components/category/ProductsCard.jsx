@@ -1,3 +1,4 @@
+import { AddButton } from '@/components/Cart/cartButton'
 import Currency from '@/components/custom/currency'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -45,9 +46,10 @@ const ProductsCard = ({ products }) => {
                                     {/* <p className='line-through'>{product.price}</p> */}
 
                                 </div>
-                                <Button variant={"primary"} className={"w-full"}>
+                                {/* <Button variant={"primary"} className={"w-full"}>
                                     Add to Cart
-                                </Button>
+                                </Button> */}
+                                <AddButton items={product} />
                             </div>
                         </CardContent>
 

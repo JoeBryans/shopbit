@@ -27,21 +27,22 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <Providers>
         <Session>
-  <SidebarProvider>
-        
+
 
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 `}
           >
-            
+            <SidebarProvider>
+
               <NavBar />
               <Toaster richColors position="top-right" />
               <main className="min-h-[100vh] w-full overflow-x-auto scrollbar-hide">
                 {children}
               </main>
               <Footer />
-            </body>
             </SidebarProvider>
+
+          </body>
 
         </Session>
       </Providers>

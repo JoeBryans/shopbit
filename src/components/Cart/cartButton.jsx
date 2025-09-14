@@ -1,5 +1,5 @@
 "use client";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
 import {
@@ -10,12 +10,52 @@ import {
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { loadClientSecret } from "@/hooks/store/localstorage";
+import { useSession } from "next-auth/react";
+import { el, is } from "date-fns/locale";
+import { toast } from "sonner";
+import Loader from "@/app/(auth)/_components/Loader";
 
 export const AddButton = ({ items }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useDispatch();
+  const { data: user, status } = useSession();
+  const userId = user?.user?.id;
+  const AddToCart = async (item) => {
+    if (userId) {
+      try {
+        setIsLoading(true);
+        const res = await fetch("/api/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            productId: item?.id,
+            quantity: 1,
+            price: item?.price
+          })
+        })
+        console.log(res);
+        const datas = await res.json();
+        if (datas?.ok) {
+          setIsLoading(false);
+          toast.success(datas?.message);
 
-  const AddToCart = (item) => {
-    dispatch(addToCart(item));
+        } else {
+          setIsLoading(false);
+          toast.error(datas?.message);
+        }
+
+      } catch (error) {
+        setIsLoading(false);
+        console.log(error);
+        toast.error(error);
+        return;
+      }
+    } else {
+      dispatch(addToCart(item));
+
+    }
   };
   return (
     <Button
@@ -23,7 +63,9 @@ export const AddButton = ({ items }) => {
       className="cursor-pointer bg-blue-500 hover:bg-white hover:text-blue-500 hover:border-blue-500 hover:border-2 font-semibold transition:all w-full"
       onClick={() => AddToCart(items)}
     >
-      Add to cart
+      {
+        isLoading ? <Loader isLoading={isLoading} /> : <>Add to cart</>
+      }
     </Button>
   );
 };

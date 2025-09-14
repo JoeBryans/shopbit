@@ -9,20 +9,35 @@ const CartItems = ({ Items }) => {
   // const num = Math.round(items?.rating);
   // const rate = new Array(num).fill(0) || [];
   const rate = [1, 2, 3].fill(0);
-  const price = items.price;
-  const totalPrice = items?.qty * price;
+  const price = items.price || items?.product?.price;
+  const totalPrice = items?.qty * price || items?.totalPrice;
   // const total=cartItems.reduce((acc,item)=>{
   //   return acc+Number(item.qty)*Number(item.price)
   // },0)
   return (
     <div className="flex gap-3 h-28 rounded px-1 mt-5 border-b-2  py-1">
-      <Image
-        src={items.image[0]?.url}
-        alt=""
-        width={100}
-        height={100}
-        className="w-[30%] h-24 object-contain rounded-lg "
-      />
+    {
+      items?.images?.length>0&&(
+          <Image
+            src={items.images[0]?.url }
+            alt={items?.name}
+            width={500}
+            height={500}
+            className="w-[30%] h-24 object-contain rounded-lg "
+          />
+      ) 
+    }
+    {
+      items?.product?.images?.length>0&&(
+          <Image
+            src={ items?.product?.images[0]?.url }
+            alt={items?.product?.name}
+            width={500}
+            height={500}
+            className="w-[30%] h-24 object-contain rounded-lg "
+          />
+      ) 
+    }
       <div className="flex flex-col gap-1  ">
         <span className="line-clamp-1">{items.name}</span>
         {/* <span className="text-gray-700 font-semi-bold">

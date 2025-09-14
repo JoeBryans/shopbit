@@ -1,7 +1,7 @@
 import React from 'react'
 import { SidebarTrigger } from '@/components/ui/sidebar'
-import SideBar from '@/components/SideBar'
-import ProductsCard from '@/components/category/ProductsCard'
+import SideBar from '@/app/(root)/_components/SideBar'
+import ProductsCard from '@/app/(root)/_components/category/ProductsCard'
 const page = async ({ searchParams }) => {
     const params = await searchParams
     console.log("category", params?.category)

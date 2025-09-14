@@ -8,6 +8,7 @@ import { Heart } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect } from 'react'
 import RelatedProducts from './RelatedProducts';
+import Qty from '@/components/Cart/Qty';
 
 const ProductCard = ({ product, relatedProducts }) => {
     const [imageIndex, setImageIndex] = React.useState(0);
@@ -30,7 +31,7 @@ const ProductCard = ({ product, relatedProducts }) => {
                                 width={1000}
                                 height={1000}
                                 className="object-cover w-full h-full rounded-lg"
-                                // onWheel={}
+                            // onWheel={}
                             />
                         </div>
                         <div className="flex items-center gap-1 w-full">
@@ -123,7 +124,7 @@ const ProductCard = ({ product, relatedProducts }) => {
                         )}
 
                         {/* // qty */}
-
+                        <Qty items={product} />
 
                     </div>
                 </div>

@@ -1,43 +1,60 @@
 "use client";
 import { AddButton } from "./cartButton";
 import { Button } from "../ui/button";
-import { addToCart, DecreaseQty } from "../../hooks/store/cartSlice";
-import React from "react";
+import { addToCart, DecreaseQty } from "@/hooks/store/cartSlice";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GetUser from "../headers/GetUser";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Qty = ({ items }) => {
+  console.log("Qty", items);
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const { data, status } = useSession();
-
-  const match = cartItems.find((item) => item.id === items.id);
-  // const user=GetUser();
-  console.log("user", data?.user);
   const user = data?.user;
-  const quantity = match?.qty;
+
+  const match = cartItems.find((item) => item?.id === items?.id);
+  const quantity = match?.qty || items?.quantity;
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const Increment = async (item) => {
-    dispatch(addToCart(item));
+    // dispatch(addToCart(item));
     if (!user) {
-      return
+      dispatch(addToCart(item));
     }
     try {
-      const cart = await fetch("/api/carts", {
+      const res = await fetch("/api/cart", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          totalPrice: item.price,
-          userId: user.id,
-          qty: 1,
-          productId: item.id,
-        }),
-      });
-      console.log("cart", cart);
+        body: JSON.stringify(
+          {
+            productId: item?.productId,
+            quantity: 1,
+            price: item?.product?.price
+          }
+        )
+      })
+      console.log(res);
+      const datas = await res.json();
+      if (datas?.ok) {
+        setIsLoading(false);
+        toast.success(datas?.message);
+        router.refresh();
+
+      }
+      else {
+        setIsLoading(false);
+        toast.error(datas?.message);
+      }
     } catch (error) {
+      setIsLoading(false);
       console.log("error", error);
+      toast.error(error);
     }
 
   };
@@ -47,7 +64,7 @@ const Qty = ({ items }) => {
   return (
     <div className="w-full flex items-center gap-3 my-2">
       {quantity >= 1 ? (
-        <div className="w-full flex items-center justify-between gap-2">
+        <div className="w-full flex items-center justify-start gap-4">
           <Button
             size={"sm"}
             variant={"outline"}
