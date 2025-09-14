@@ -22,9 +22,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
+} from "@/components/ui/sidebar";
 import Link from "next/link";
-import Logo from "./headers/Logo";
+import Logo from "@/components/headers/Logo";
 
 // Menu items.
 const items = [

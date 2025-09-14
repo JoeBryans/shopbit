@@ -5,6 +5,7 @@ import NavBar from "@/components/headers/NavBar";
 import Footer from "@/components/Footer/Footer";
 import { Session } from "./session";
 import Providers from "./provider";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,20 +24,27 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-     <Providers>
-      <Session>
+    <html lang="en" suppressHydrationWarning>
+  <SidebarProvider>
+      <Providers>
+        <Session>
+        
+
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
-          > <NavBar />
-            <Toaster richColors position="top-right" />
-            <main className="min-h-[100vh] w-full overflow-x-auto scrollbar-hide">
-              {children}
-            </main>
-            <Footer />
-          </body>
-      </Session>
-     </Providers>
+            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 `}
+          >
+            
+              <NavBar />
+              <Toaster richColors position="top-right" />
+              <main className="min-h-[100vh] w-full overflow-x-auto scrollbar-hide">
+                {children}
+              </main>
+              <Footer />
+            </body>
+
+        </Session>
+      </Providers>
+            </SidebarProvider>
     </html>
   );
 }
