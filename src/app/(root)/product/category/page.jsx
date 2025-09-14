@@ -1,5 +1,4 @@
 import React from 'react'
-
 import SideBar from '../../_components/SideBar'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import ProductsCard from '../../_components/home/product/category/ProductsCard'
@@ -7,7 +6,7 @@ const page = async ({ searchParams }) => {
     const params = await searchParams
     const category = params?.category
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/category?category=${category}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/category?category=${category} `, { next: { revalidate: 10 } })
     const data = await res.json()
 
     return (
