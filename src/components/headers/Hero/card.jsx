@@ -12,7 +12,6 @@ import {
 } from "../../ui/carousel"
 import Image from "next/image"
 const images = [
-    "/71qcoYgEhzL._SX3000_.jpg",
     "/71xHyqBwdcL._SX3000_.jpg",
     "/81hIlE5xocL._SX3000_.jpg",
     "/619geyiQI5L._SX3000_.jpg",

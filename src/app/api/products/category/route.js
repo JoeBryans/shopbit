@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const category = searchParams.get('category');
-    console.log("category from params :", category);
+    // console.log("category from params :", category);
 
 
     // const category = searchParams.get('category');
@@ -50,7 +50,7 @@ export async function GET(req) {
             }
         );
 
-        console.log("products :", products);
+        // console.log("products :", products);
 
 
         return NextResponse.json(products);

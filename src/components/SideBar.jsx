@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const SideBar = async () => {
-    const category = await fetch('http://localhost:3000/api/category')
+    const category = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/category`)
     const data = await category.json()
     console.log(data)
 
@@ -19,7 +19,7 @@ const SideBar = async () => {
                     <div>
                         {data.map((item, index) => {
                             return (
-                                <Link key={index} href={`/product/category?category=${encodeURI(item.slug)}`}>
+                                <Link key={index} href={`/category?category=${encodeURI(item.slug)}`}>
                                     <SidebarMenuButton>
                                         {item.name}
                                     </SidebarMenuButton>
@@ -31,7 +31,7 @@ const SideBar = async () => {
             </Sidebar>
         </div>
     )
-   
+
 }
 
 export default SideBar

@@ -8,13 +8,13 @@ const page = async ({ searchParams }) => {
 
     const ParamsCategory = params?.category
 
-    const res = await fetch(`http://localhost:3000/api/products/category?category=${ParamsCategory}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/category?category=${ParamsCategory}`)
     const data = await res.json()
     console.log("data", data);
     return (
         <div className='w-full min-h-[100vh] flex justify-between '>
             <div className='flex h-full'>
-                {/* <SideBar /> */}
+                <SideBar />
                 <div className='md:hidden '>
                     <SidebarTrigger />
                 </div>
