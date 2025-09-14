@@ -1,6 +1,8 @@
 import React from 'react'
-import ProductCard from '../../_components/home/product/category/ProductCard'
+
 import SideBar from '../../_components/SideBar'
+import { SidebarTrigger } from '@/components/ui/sidebar'
+import ProductsCard from '../../_components/home/product/category/ProductsCard'
 const page = async ({ searchParams }) => {
     const params = await searchParams
     const category = params?.category
@@ -9,10 +11,15 @@ const page = async ({ searchParams }) => {
     const data = await res.json()
 
     return (
-        <div className='w-full flex justify-between '>
-            <SideBar/>
-            <div className='md:mr-10'>
-                <ProductCard products={data} /></div>  
+        <div className='w-full min-h-[100vh] flex justify-between '>
+            <div className='flex h-full'>
+                <SideBar />
+                <div className='md:hidden '>
+                    <SidebarTrigger />
+                </div>
+            </div>
+            <div className='md:mr-10 my-10'>
+                <ProductsCard products={data} /></div>
         </div>
     )
 }

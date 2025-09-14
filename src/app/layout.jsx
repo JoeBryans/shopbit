@@ -25,9 +25,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-  <SidebarProvider>
       <Providers>
         <Session>
+  <SidebarProvider>
         
 
           <body
@@ -41,10 +41,10 @@ export default function RootLayout({ children }) {
               </main>
               <Footer />
             </body>
+            </SidebarProvider>
 
         </Session>
       </Providers>
-            </SidebarProvider>
     </html>
   );
 }
