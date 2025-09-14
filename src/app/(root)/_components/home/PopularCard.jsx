@@ -6,8 +6,7 @@ import React from 'react'
 
 const PopularCard = async () => {
 
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`, {
-  });
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`);
   const {LatestProducts, phones, fashion, electronics, computers, home, clothing} = res?.data;
 
   const productCard = [
