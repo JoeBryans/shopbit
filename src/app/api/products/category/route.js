@@ -5,6 +5,10 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const category = searchParams.get('category');
     console.log("category from params :", category);
+
+
+    // const category = searchParams.get('category');
+    // console.log("category from params :", category);
     try {
         const products = await prisma.product.findMany(
 
@@ -46,14 +50,14 @@ export async function GET(req) {
             }
         );
 
+        console.log("products :", products);
 
 
-        return NextResponse.json(
-            products,
-        );
+        return NextResponse.json(products);
     } catch (error) {
         console.log(error);
 
         return NextResponse.json({ message: "something went wrong  ", error });
     }
+
 }

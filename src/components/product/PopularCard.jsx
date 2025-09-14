@@ -7,7 +7,7 @@ import React from 'react'
 const PopularCard = async () => {
 
   const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products`);
-  const {LatestProducts, phones, fashion, electronics, computers, home, clothing} = res?.data;
+  const { LatestProducts, phones, fashion, electronics, computers, home, clothing } = res?.data;
 
   const productCard = [
     {
@@ -153,7 +153,7 @@ const PopularCard = async () => {
                   <CardContent key={product.id}
                     className={"w-48 flex flex-col items-start py-2 px-1 "}
                   >
-                    <div  className='w-full'>
+                    <div className='w-full'>
                       <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
                         className='w-full h-44 object-cover'
                       />
@@ -172,64 +172,64 @@ const PopularCard = async () => {
         </div>
 
         {/* best sellers in computers & accessories */}
-  
-            <div className='max-w-full w-max bg-white rounded-2xl pt-2 '>
+
+        <div className='max-w-full w-max bg-white rounded-2xl pt-2 '>
           <h1 className='ml-4 text-lg font-semibold '>Best Sellers in Computers & Accessories</h1>
-        
-            <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
-              <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
+
+          <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
+            <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
 
               {computers?.length > 0 && (computers?.map((product) => {
-                  return (
-                    <CardContent key={product.id}
-                      className={"w-48 flex flex-col items-start py-2 px-1 "}
-                    >
-                      <Link href={`/product/category?category=${encodeURI(product.category.name)}`} className='w-full'>
-                        <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
-                          className='w-full h-44 object-cover'
-                        />
+                return (
+                  <CardContent key={product.id}
+                    className={"w-48 flex flex-col items-start py-2 px-1 "}
+                  >
+                    <Link href={`/category?category=${encodeURI(product.category.name)}`} className='w-full'>
+                      <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
+                        className='w-full h-44 object-cover'
+                      />
 
-                      </Link >
-                    </CardContent>
+                    </Link >
+                  </CardContent>
 
-                  )
-                }
+                )
+              }
 
 
 
-                ))}
-              </div>
-            </Card>
-          </div>
-       
+              ))}
+            </div>
+          </Card>
+        </div>
+
         {/* Best Sellers in Clothing, Shoes & Jewelry*/}
-          <div className='max-w-full w-max bg-white rounded-2xl pt-2 '>
+        <div className='max-w-full w-max bg-white rounded-2xl pt-2 '>
           <h1 className='ml-4 text-lg font-semibold '>Best Sellers in Fashions</h1>
-            <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
-              <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
+          <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
+            <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
 
               {fashion?.length > 0 && (fashion?.map((product) => {
-                  return (
-                    <CardContent key={product.id}
-                      className={"w-48 flex flex-col items-start py-2 px-1 "}
-                    >
-                      <Link href={`/product/category?category=${encodeURI(product.category.name)}`} className='w-full'>
-                        <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
-                          className='w-full h-44 object-cover'
-                        />
+                return (
+                  <CardContent key={product.id}
+                    className={"w-48 flex flex-col items-start py-2 px-1 "}
+                  >
+                    <Link href={`/category?category=${encodeURI(product.category.name)}`} className='w-full'>
+                      <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
+                        className='w-full h-44 object-cover'
+                      />
 
-                      </Link >
-                    </CardContent>
+                    </Link >
+                  </CardContent>
 
-                  )
-                }
+                )
+              }
 
 
 
-                ))}
-              </div>
-            </Card>
-          </div>
+              ))}
+            </div>
+          </Card>
+        </div>
         {/* Best Sellers in Clothing, Shoes & Jewelry*/}
         {/* <Card className={"w-full overflow-x-auto scrollbar-hide"}>
           <h1 className='ml-4 text-lg font-semibold '>Best Sellers in Clothing, Shoes & Jewelry</h1>
@@ -314,31 +314,31 @@ const PopularCard = async () => {
         {/* best sellers in phones & accessories */}
         <div className='max-w-full w-max bg-white rounded-2xl pt-2 '>
           <h1 className='ml-4 text-lg font-semibold '>Best Sellers in Phones & Accessories</h1>
-            <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
-              <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
+          <Card className={"w-full bg-white overflow-x-auto scrollbar-hide"}>
+            <div className="flex gap-1 mx-auto  px-4  overflow-auto scrollbar-hide">
 
               {phones?.length > 0 && (phones?.map((product) => {
-                  return (
-                    <CardContent key={product.id}
-                      className={"w-48 flex flex-col items-start py-2 px-1 "}
-                    >
-                      <Link href={`/product/category?category=${encodeURI(product.category.name)}`} className='w-full'>
-                        <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
-                          className='w-full h-44 object-cover'
-                        />
+                return (
+                  <CardContent key={product.id}
+                    className={"w-48 flex flex-col items-start py-2 px-1 "}
+                  >
+                    <Link href={`/category?category=${encodeURI(product.category.name)}`} className='w-full'>
+                      <Image src={product?.images[0]?.url} alt={product?.name} width={100} height={100}
+                        className='w-full h-44 object-cover'
+                      />
 
-                      </Link >
-                    </CardContent>
+                    </Link >
+                  </CardContent>
 
-                  )
-                }
+                )
+              }
 
 
 
-                ))}
-              </div>
-            </Card>
-          </div>
+              ))}
+            </div>
+          </Card>
+        </div>
         {/* Best Sellers in Grocery & Gourmet Food */}
         {/* <Card className={"w-full overflow-x-auto scrollbar-hide"}>
           <h1 className='ml-4 text-lg font-semibold '>Best Sellers in Grocery & Gourmet Food</h1>

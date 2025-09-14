@@ -1,18 +1,20 @@
 import React from 'react'
-import SideBar from '../../_components/SideBar'
 import { SidebarTrigger } from '@/components/ui/sidebar'
-import ProductsCard from '../../_components/home/product/category/ProductsCard'
-import axios from 'axios'
+import SideBar from '@/components/SideBar'
+import ProductsCard from '@/components/category/ProductsCard'
 const page = async ({ searchParams }) => {
     const params = await searchParams
-    const category = params?.category
+    console.log("category", params?.category)
 
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL} /api/products/category?category=${category} `)
-    const {data} = res
+    const ParamsCategory = params?.category
+
+    const res = await fetch(`http://localhost:3000/api/products/category?category=${ParamsCategory}`)
+    const data = await res.json()
+    console.log("data", data);
     return (
         <div className='w-full min-h-[100vh] flex justify-between '>
             <div className='flex h-full'>
-                <SideBar />
+                {/* <SideBar /> */}
                 <div className='md:hidden '>
                     <SidebarTrigger />
                 </div>
