@@ -8,7 +8,7 @@ const page = async ({ searchParams }) => {
     const category = params?.category
 
     const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL} /api/products/category?category=${category} `)
-    const data = await res.json()
+    const {data} = res
 
     return (
         <div className='w-full min-h-[100vh] flex justify-between '>
