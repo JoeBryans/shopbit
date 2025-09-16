@@ -39,3 +39,12 @@ export const shippLoadState = (get) => {
 //     return {};
 //   }
 // };
+
+export const loadCheckoutStorage = (state) => {
+  try {
+    const serializedState = localStorage.getItem(`${state}`);
+    return serializedState ? JSON.parse(serializedState) : null;
+  } catch (err) {
+    return null;
+  }
+}

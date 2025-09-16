@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import { Session } from "./session";
 import Providers from "./provider";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import QueryClientProviders from "./QueryClientProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,22 +29,22 @@ export default function RootLayout({ children }) {
       <Providers>
         <Session>
 
+          <QueryClientProviders>
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 `}
+            >
+              <SidebarProvider>
 
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 `}
-          >
-            <SidebarProvider>
+                <NavBar />
+                <Toaster richColors position="top-right" />
+                <main className="min-h-[100vh] w-full overflow-x-auto scrollbar-hide">
+                  {children}
+                </main>
+                <Footer />
+              </SidebarProvider>
 
-              <NavBar />
-              <Toaster richColors position="top-right" />
-              <main className="min-h-[100vh] w-full overflow-x-auto scrollbar-hide">
-                {children}
-              </main>
-              <Footer />
-            </SidebarProvider>
-
-          </body>
-
+            </body>
+          </QueryClientProviders>
         </Session>
       </Providers>
     </html>

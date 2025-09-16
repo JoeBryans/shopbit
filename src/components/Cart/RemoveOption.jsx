@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -11,12 +12,14 @@ import {
 import { RemoveButton } from "./cartButton";
 
 export default function RemoveOption({ CartItems }) {
+  console.log("remove", CartItems);
+
   return (
     <Dialog>
       <DialogTrigger>
-        <span className="py-1 px-1.5 text-white rounded-lg  bg-yellow-500 hover:bg-white cursor-pointer hover:text-yellow-500 hover:border-yellow-500 hover:border-2 font-semibold transition:all w-max  ">
+        <span className="py-1 px-1.5 text-white rounded-lg  bg-orange-600  hover:bg-white cursor-pointer hover:text-orange-600 hover:border-orange-600  hover:border-2 font-semibold transition:all w-max  ">
           Remove
-        </span>{" "}
+        </span>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -31,17 +34,18 @@ export default function RemoveOption({ CartItems }) {
           </span>
         </DialogDescription>
 
-        <DialogFooter asChild>
-          <div className="flex items-center w-full   justify-between ">
-            <RemoveButton items={CartItems} />
-            <Button
-              size={"sm"}
-              variant={"outline"}
-              className=" font-semibold cursor-pointer w-max  "
-            >
-              Save
-            </Button>
-          </div>
+        <DialogFooter  >
+          <DialogClose asChild>
+            <div className="flex items-center w-full   justify-between ">
+              <RemoveButton items={CartItems} />
+              <Button
+                size={"sm"}
+                variant={"outline"}
+                className=" font-semibold cursor-pointer w-max  "
+              >
+                Save
+              </Button>
+            </div></DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

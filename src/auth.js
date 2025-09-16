@@ -43,7 +43,20 @@ export const authOptions = {
             return null;
           }
           const { password, ...user } = existUser;
-          console.log("user", user);
+          // const user = await prisma.user.findUnique({
+          //   where: { id: userInfo.id },
+          //   include: {
+          //     address: true,
+          //     paymentMethod: true,
+          //     cartItems: true,
+          //     products: true,
+          //     orders: true,
+          //     recentViews: true,
+          //     accounts: true,
+          //   }
+          // }
+          // );
+          // console.log("userauth", user);
           return user;
         } catch (error) {
           return NextResponse.json(error?.message);

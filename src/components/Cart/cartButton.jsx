@@ -11,9 +11,37 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { loadClientSecret } from "@/hooks/store/localstorage";
 import { useSession } from "next-auth/react";
-import { el, is } from "date-fns/locale";
 import { toast } from "sonner";
 import Loader from "@/app/(auth)/_components/Loader";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+async function RemoveItem(data) {
+  try {
+    const res = await fetch("/api/cart", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          productId: data?.productId,
+          id: data?.id,
+        }
+      )
+    })
+    console.log(res);
+    const datas = await res.json();
+    if (datas?.ok) {
+      toast.success(datas?.message);
+    } else {
+      toast.error(datas?.message);
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error(error);
+  }
+}
+
 
 export const AddButton = ({ items }) => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -71,15 +99,43 @@ export const AddButton = ({ items }) => {
 };
 
 export const RemoveButton = ({ items }) => {
+  console.log("removeButton", items);
+
+  const { data: user, status } = useSession();
+  const userId = user?.user?.id;
+  const queryClient = useQueryClient();
+
+  const RemoveMutation = useMutation(
+    {
+      mutationFn: RemoveItem,
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["cart"]);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  )
+
   const dispatch = useDispatch();
 
   const RemoveFromCart = (item) => {
-    dispatch(removeFromCart(item));
+
+    if (!userId) {
+      dispatch(removeFromCart(item));
+    } else {
+      RemoveMutation.mutate(
+        {
+          productId: item?.productId,
+          id: item?.id,
+        }
+      );
+    }
   };
   return (
     <Button
       size={"sm"}
-      className="cursor-pointer bg-yellow-500 hover:bg-white hover:text-yellow-500 hover:border-yellow-500 hover:border-2 font-semibold transition:all w-max"
+      className="cursor-pointer bg-orange-600  hover:bg-white hover:text-orange-600  hover:border-orange-600  hover:border-2 font-semibold transition:all w-max"
       onClick={() => RemoveFromCart(items)}
     >
       Remove

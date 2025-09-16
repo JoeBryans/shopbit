@@ -206,12 +206,20 @@ model Address {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   userId   String   @db.ObjectId
   users    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName  String?
+  lastName  String?
   address  String?
+  deliveryAddress  String?
   city     String?
   state    String?
-  zip      String?
+  postalCode  String?
   country  String?
+  email  String?
+  phone  String?
+  additionalInfo  String?
+
   createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Payment {

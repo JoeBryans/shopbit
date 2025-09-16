@@ -14,25 +14,28 @@ import CartItems from "./cartItems";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { FetchCart } from "@/app/(root)/cart/page";
-import { set } from "zod";
 import { useSession } from "next-auth/react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
+
+
+
 export function CartBar() {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const { data:user, status } = useSession();
-  const [cart, setCart] = useState([]);
-
-
-  useEffect(() => {
-    // if (!user?.user && cartItems?.length > 0) {
-    //   setCart(cartItems);
-    // }
-    async function GetCart() {
-      const cart = await FetchCart()
-      setCart(cart);
+  const queryClient = useQueryClient();
+  // tangstack query
+  const { error, data: cart } = useQuery(
+    {
+      queryKey: ['cart'],
+      queryFn: async () => {
+        const res = await fetch("/api/cart");
+        return res.json()
+      }
+      // enabled: address && paymentMethod,
     }
-    GetCart()
-  }, []);
+  )
+  console.log("cartbar", cart);
+
 
   // const total = cartItems.reduce((acc, item) => acc + item.qty, 0);
   // const total=cartItems.reduce((acc,item)=>{
@@ -65,7 +68,7 @@ export function CartBar() {
         </SheetHeader>
         <div className="">
           {cart &&
-            cart.slice(0, 3).map((item, index) => {
+            cart?.length > 0 && cart.slice(0, 3).map((item, index) => {
               return <CartItems key={index} Items={item} />;
             })}
         </div>
