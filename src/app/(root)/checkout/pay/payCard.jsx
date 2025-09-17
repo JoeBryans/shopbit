@@ -1,15 +1,15 @@
 "use client";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import Loader from "@/components/custom/Loader";
 
 const CheckoutForm = (clientSecret) => {
-    const {address} = useSelector((state) => state.checkOut);
-     const [isLoading,setIsLoading]=useState(false)
+    const { address } = useSelector((state) => state.checkOut);
+    const [isLoading, setIsLoading] = useState(false)
     const stripe = useStripe();
     const elements = useElements();
     const url = process.env.NEXTAUTH_URL;
@@ -25,28 +25,29 @@ const CheckoutForm = (clientSecret) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-             setIsLoading(true)
+            setIsLoading(true)
             if (!stripe || !elements) {
-                             setIsLoading(false)
+                setIsLoading(false)
 
                 return;
             }
             const { error } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: "/profile/order",
+                    return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/profile/order`,
                 },
             });
             if (!error) {
                 setIsLoading(false)
                 // If `result.error` is `null`, it's a success
-                console.log(error);
                 toast.success("Payment successful");
                 localStorage.removeItem("clientSecret");
 
                 // Send the paymentIntent.id to your server to create the order
             } else {
                 setIsLoading(false)
+                console.log(error);
+
                 toast.error(`Something went wrong ${error}`);
                 // Show error to your customer
                 console.log("error occured");

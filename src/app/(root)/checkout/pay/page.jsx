@@ -12,29 +12,29 @@ const page = () => {
   const router = useRouter();
   const clientSecret = loadClientSecret("clientSecret");
   console.log(" clientSecret", clientSecret);
-  if (clientSecret === null || clientSecret === "" || clientSecret === undefined) {
+  if (clientSecret === undefined) {
     router.push("/checkout/summary");
   }
   return (
     <div className='w-full min-h-[100vh]  flex flex-col items-center justify-center '>
-    <Elements
-          stripe={stripePromise}
-          options={{
-            clientSecret,
-            appearance: {
-              theme: "stripe",
+      <Elements
+        stripe={stripePromise}
+        options={{
+          clientSecret,
+          appearance: {
+            theme: "stripe",
 
-              labels: "above",
-            },
-          }}
-        >
-          {
-            clientSecret !== undefined && (
-              <CheckoutForm clientSecret={clientSecret} />
-            )
-          }
-        </Elements>
-      
+            labels: "above",
+          },
+        }}
+      >
+        {
+          clientSecret !== undefined && (
+            <CheckoutForm clientSecret={clientSecret} />
+          )
+        }
+      </Elements>
+
     </div>
   )
 }
