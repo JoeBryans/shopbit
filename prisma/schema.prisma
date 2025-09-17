@@ -166,15 +166,39 @@ model Review {
 }
 
 model Order {
-  id         String      @id @default(auto()) @map("_id") @db.ObjectId
-  total      Float
-  orderItems OrderItem[]
-  userId     String?     @db.ObjectId
-  status     String?     @default("pending")
-  user       User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  payment    Payment[]
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  total         Float
+  orderItems    OrderItem[]
+  userId        String?        @db.ObjectId
+  status        OrderStatus?   @default(PENDING)
+  user          User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  paymentStatus PaymentStatus? @default(PENDING)
+  payment       Payment[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([paymentStatus])
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+  DELIVERED
+  FAILED
+  REFUNDED
+  VOIDED
+  UNCOLLECTIBLE
+}
+
+enum PaymentStatus {
+  PENDING
+  FAILED
+  // PROCESSING
+  PAID
 }
 
 model OrderItem {
@@ -203,22 +227,22 @@ model CartItems {
 }
 
 model Address {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId   String   @db.ObjectId
-  users    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  firstName  String?
-  lastName  String?
-  address  String?
-  deliveryAddress  String?
-  city     String?
-  state    String?
-  postalCode  String?
-  country  String?
-  email  String?
-  phone  String?
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String  @db.ObjectId
+  users           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName       String?
+  lastName        String?
+  address         String?
+  deliveryAddress String?
+  city            String?
+  state           String?
+  postalCode      String?
+  country         String?
+  email           String?
+  phone           String?
   additionalInfo  String?
 
-  createAt DateTime @default(now())
+  createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 

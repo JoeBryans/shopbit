@@ -23,7 +23,7 @@ export async function POST(request) {
         // } 
         // else {
         if (paymentMethod === "card") {
-             payment = await stripe.paymentIntents.create({
+            payment = await stripe.paymentIntents.create({
                 amount: parseInt(totalPrice) * 100,
                 currency: "NGN",
                 automatic_payment_methods: {
@@ -43,7 +43,8 @@ export async function POST(request) {
             data: {
                 total: totalPrice,
                 userId: userId,
-                status: "pending",
+                status: "PENDING",
+                paymentStatus: "PENDING",
                 orderItems: {
                     create: items.map(item => {
                         return {
@@ -57,6 +58,15 @@ export async function POST(request) {
                 // paymentMethod:paymentMethod
             }
         })
+        if (order) {
+            const deleteCart = await prisma.cartItems.deleteMany({
+                where: {
+                    userId: userId
+                }
+            })
+            console.log("cart deleted", deleteCart);
+        }
+
 
         console.log("order created", order);
 
@@ -90,5 +100,40 @@ export async function POST(request) {
         console.log(error);
 
         return NextResponse.json({ error: error });
+    }
+}
+export async function GET(req) {
+    const { user } = await getServerSession(authOptions);
+    const userId = user?.id;
+    console.log("userId:", userId);
+    try {
+        if (!userId) return NextResponse.json({ error: "User not found" });
+        const PendingOrders = await prisma.order.findMany({
+            where: {
+                userId: userId,
+                status: "PENDING",
+            },
+            include: {
+                orderItems: true,
+                payment: true,
+            }
+        });
+
+        const orders = await prisma.order.findMany({
+            where: {
+                userId: userId,
+                status: "DELIVERED" || "COMPLETED",
+                paymentStatus: "PAID",
+            },
+            include: {
+                orderItems: true,
+                payment: true,
+            },
+        });
+        console.log("orders", orders);
+        return NextResponse.json(orders);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json(error);
     }
 }
