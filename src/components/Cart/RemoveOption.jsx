@@ -12,7 +12,6 @@ import {
 import { RemoveButton } from "./cartButton";
 
 export default function RemoveOption({ CartItems }) {
-  console.log("remove", CartItems);
 
   return (
     <Dialog>

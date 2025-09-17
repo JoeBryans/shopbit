@@ -57,7 +57,6 @@ export const UnSignedInUserCartCard = ({ CartItems }) => {
 
 
 export const SignedInUserCartCard = ({ CartItems }) => {
-  console.log("CartItems :", CartItems);
 
 
   return (

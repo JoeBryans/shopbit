@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import PaymentMethodCard from '../_components/Cards/PaymentMethod'
 import { Button } from '@/components/ui/button'
 import { useSession } from 'next-auth/react'
@@ -8,6 +8,9 @@ import { useRouter } from 'next/navigation'
 import AddressCard from '../_components/Cards/AddressCard'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ItemsCard } from '../_components/Cards/ItemsCard'
+import { loadClientSecret } from '@/hooks/store/localstorage'
+import axios from 'axios'
+import { toast } from 'sonner'
 async function GetCartItems() {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/cart`, {
@@ -37,6 +40,47 @@ const Summary = () => {
         }
     )
 
+    const totalPrice = cartItems && cartItems.length > 0 && cartItems?.reduce((acc, item) => {
+        return acc + Number(item.quantity) * Number(item.product.price);
+    }, 0);
+
+    const paymentIntentId = loadClientSecret("paymentIntentId");
+
+    console.log(paymentIntentId);
+
+    const handleCheckOut = async () => {
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/order`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    items: cartItems,
+                    totalPrice: totalPrice,
+                    // totalquantity: ,
+                    shippingAddress: address,
+                    paymentMethod: paymentMethod?.name,
+                    paymentIntentId: paymentIntentId || null,
+                })
+            })
+            const data = await res.json();
+            if (res?.ok) {
+                toast.success(" Order placed successfully");
+                localStorage.setItem("clientSecret", data?.clientSecret);
+                localStorage.setItem("paymentIntentId", data?.paymentIntentId);
+                router.push("/checkout/pay");
+
+            } else {
+                toast.error("Something went wrong");
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error);
+        }
+    };
+
 
 
 
@@ -46,7 +90,7 @@ const Summary = () => {
                 <PaymentMethodCard paymentMethod={paymentMethod} />
 
                 <div className='max-w-xl w-full rounded-xl border-1 bg-white'>
-                    {cartItems && cartItems.length > 0 ? (
+                    {cartItems && cartItems?.length > 0 ? (
                         cartItems.map((item, index) => {
                             return <ItemsCard key={index} CartItems={item} />
 
@@ -59,8 +103,8 @@ const Summary = () => {
                 <div className='w-full flex justify-end my-4'>
                     <Button variant={"primary"}
                         className={"disabled:bg-indigo-400 disabled:text-white"}
-                        disabled={cartItems === null && !address && !paymentMethod}
-                        onClick={() => router.push("/checkout/payment")}
+                        disabled={cartItems?.length === 0 && !address && !paymentMethod}
+                        onClick={handleCheckOut}
 
                     >
                         <span className=' font-semibold text-sm'>Proceed to Checkout</span>

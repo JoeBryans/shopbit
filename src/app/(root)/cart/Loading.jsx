@@ -8,7 +8,7 @@ const Loading = () => {
                 <div className='max-w-2xl w-full p-4 bg-white  mx-auto'>
                     {
                         [1, 2, 3, 4, 5].map((_) => {
-                            return <div className="flex flex-col w-full gap-3  px-3 mt-2 border-b-1  h-44 py-1  ">
+                            return <div className="flex flex-col w-full gap-3  px-3 mt-2 border-b-1  h-44 py-1 animate-pulse ">
                                 <div className="flex  w-full gap-3   items-center  ">
                                     <div className=" w-36 h-24 flex items-center justify-center rounded-lg">
                                         <Skeleton
@@ -38,7 +38,7 @@ const Loading = () => {
                     }
                 </div>
 
-                <div className='w-[300px] p-4 bg-white  mx-auto'>
+                <div className='w-[300px] p-4 bg-white  mx-auto animate-pulse'>
                     {/* items total */}
                     <div className='flex justify-between items-center border-b-1 '>
                         <Skeleton className='text-gray-700 font-semibold text-sm h-20 w-40' />

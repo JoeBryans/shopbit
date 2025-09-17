@@ -99,7 +99,6 @@ export const AddButton = ({ items }) => {
 };
 
 export const RemoveButton = ({ items }) => {
-  console.log("removeButton", items);
 
   const { data: user, status } = useSession();
   const userId = user?.user?.id;
