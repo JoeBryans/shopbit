@@ -13,7 +13,7 @@ import { loadClientSecret } from "@/hooks/store/localstorage";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import Loader from "@/app/(auth)/_components/Loader";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 async function RemoveItem(data) {
   try {
@@ -42,44 +42,105 @@ async function RemoveItem(data) {
   }
 }
 
+async function AddCart(item) {
+  console.log(item);
+
+  try {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(
+        {
+          productId: item?.productId,
+          quantity: item?.quantity,
+          price: item?.price
+        }
+      )
+    })
+    const datas = await res.json();
+    if (res?.ok) {
+      toast.success("Product added to cart");
+      return datas;
+    } else {
+      toast.error(datas?.message);
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error(error);
+  }
+}
 
 export const AddButton = ({ items }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useDispatch();
   const { data: user, status } = useSession();
   const userId = user?.user?.id;
+
+  const queryClient = useQueryClient();
+  const { data: cart } = useQuery(
+    {
+      queryKey: ["cart"],
+      queryFn: async () => {
+        const res = await fetch("/api/cart");
+        return res.json();
+      },
+      // refetchInterval: 1000 * 60 * 5,
+    }
+  )
+
+  const filterCart = cart?.filter((item) => item?.productId === items?.id);
+
+  const mutation = useMutation(
+    {
+
+      mutationFn: AddCart,
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["cart"]);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  )
   const AddToCart = async (item) => {
     if (userId) {
-      try {
-        setIsLoading(true);
-        const res = await fetch("/api/cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            productId: item?.id,
-            quantity: 1,
-            price: item?.price
-          })
-        })
-        console.log(res);
-        const datas = await res.json();
-        if (datas?.ok) {
-          setIsLoading(false);
-          toast.success(datas?.message);
+      mutation.mutate({
+        productId: item?.id,
+        quantity: 1,
+        price: item?.price
+      })
+      // try {
+      //   setIsLoading(true);
+      //   const res = await fetch("/api/cart", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json"
+      //     },
+      //     body: JSON.stringify({
+      //       productId: item?.id,
+      //       quantity: 1,
+      //       price: item?.price
+      //     })
+      //   })
+      //   console.log(res);
+      //   const datas = await res.json();
+      //   if (datas?.ok) {
+      //     setIsLoading(false);
+      //     toast.success(datas?.message);
 
-        } else {
-          setIsLoading(false);
-          toast.error(datas?.message);
-        }
+      //   } else {
+      //     setIsLoading(false);
+      //     toast.error(datas?.message);
+      //   }
 
-      } catch (error) {
-        setIsLoading(false);
-        console.log(error);
-        toast.error(error);
-        return;
-      }
+      // } catch (error) {
+      //   setIsLoading(false);
+      //   console.log(error);
+      //   toast.error(error);
+      //   return;
+      // }
     } else {
       dispatch(addToCart(item));
 
@@ -93,6 +154,12 @@ export const AddButton = ({ items }) => {
     >
       {
         isLoading ? <Loader isLoading={isLoading} /> : <>Add to cart</>
+      }
+      {
+        filterCart?.length > 0 && (
+
+          <span>({filterCart?.length})</span>
+        )
       }
     </Button>
   );

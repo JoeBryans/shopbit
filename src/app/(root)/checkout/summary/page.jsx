@@ -13,7 +13,7 @@ const paage = async () => {
 
 
   return (
-    <div className='w-full min-h-[100vh]  flex flex-col items-center '>
+    <div className='w-full   flex flex-col items-center '>
       <Summary />
     </div>
   )

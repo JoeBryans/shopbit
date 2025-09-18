@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { email } from "zod";
 
 export async function POST(request) {
     const { items, totalPrice, shippingAddress, paymentMethod, paymentIntentId } = await request.json();
@@ -29,12 +30,20 @@ export async function POST(request) {
                 automatic_payment_methods: {
                     enabled: true
                 },
-                // metadata: {
-                //     userId: userId,
-                //     amount: totalPrice,
-                //     shippingAddress: address,
-                //     paymentMethod: paymentMethod
-                // }
+                metadata: {
+                    userId: userId,
+                    amount: totalPrice,
+                    country: shippingAddress.country,
+                    state: shippingAddress.state,
+                    postalCode: shippingAddress.postalCode,
+                    city: shippingAddress.city,
+                    address: shippingAddress.address,
+                    phone: shippingAddress.phone,
+                    email: shippingAddress.email,
+                    firstName: shippingAddress.firstName,
+                    lastName: shippingAddress.lastName,
+                    paymentMethod: paymentMethod
+                }
             });
             console.log("payment attached", payment);
         }
@@ -45,6 +54,8 @@ export async function POST(request) {
                 userId: userId,
                 status: "PENDING",
                 paymentStatus: "PENDING",
+                shippingAddress: shippingAddress,
+
                 orderItems: {
                     create: items.map(item => {
                         return {
@@ -53,6 +64,16 @@ export async function POST(request) {
                             price: item.totalPrice
                         }
                     })
+                },
+                payment: {
+                    create: {
+                        amount: totalPrice,
+                        status: payment.status,
+                        paymentMethod: payment.payment_method,
+                        paymentIntentId: payment.id,
+                        metadata: payment.metadata,
+                        userId: userId
+                    }
                 }
                 // shippingAddress:shippingAddress,
                 // paymentMethod:paymentMethod
@@ -103,15 +124,19 @@ export async function POST(request) {
     }
 }
 export async function GET(req) {
-    const { user } = await getServerSession(authOptions);
-    const userId = user?.id;
-    console.log("userId:", userId);
+    // const { user } = await getServerSession(authOptions);
+
+    const session = await getServerSession(authOptions);
+    const userId = session?.user?.id;
+    console.log("session is :", session);
+    console.log("userId is :", userId);
     try {
         if (!userId) return NextResponse.json({ error: "User not found" });
         const PendingOrders = await prisma.order.findMany({
             where: {
                 userId: userId,
                 status: "PENDING",
+                paymentStatus: "PENDING",
             },
             include: {
                 orderItems: true,
@@ -126,7 +151,29 @@ export async function GET(req) {
                 paymentStatus: "PAID",
             },
             include: {
-                orderItems: true,
+                orderItems: {
+                    select: {
+                        product: {
+                            select: {
+                                name: true,
+                                price: true,
+                                id: true,
+                                images: true,
+                                category: {
+                                    select: {
+                                        name: true,
+                                        slug: true,
+                                    }
+                                }
+                            }
+                        },
+                        quantity: true,
+                        price: true,
+
+                    },
+
+
+                },
                 payment: true,
             },
         });

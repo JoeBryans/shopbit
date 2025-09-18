@@ -1,9 +1,18 @@
 import React from 'react'
+import Sidebar from './_components/Sidebar'
 
 const layout = ({ children }) => {
-  return (
-<div>{children}</div>
-  )
+    return (
+        <div className='w-full   '>
+            <div className='w-max min-h-[100vh]  flex ju overflow-auto scrollbar-hide  '>
+                <Sidebar />
+                <main className='ml-5'>
+                    {children}
+
+                </main>
+            </div>
+        </div>
+    )
 }
 
 export default layout

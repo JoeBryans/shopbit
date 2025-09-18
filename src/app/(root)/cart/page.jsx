@@ -106,7 +106,7 @@ const page = () => {
           </div>
 
           {/* cart summary */}
-          <div className='w-[300px] p-4 bg-white  mx-auto'>
+          <div className='max-w-[300px] w-full p-4 bg-white  mx-auto'>
 
             <h1 className='text-xl font-semibold text-gray-700 mb-4 border-b-1'>Your Cart Summary</h1>
             {/* items total */}

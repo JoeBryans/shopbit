@@ -77,7 +77,7 @@ const Qty = ({ items }) => {
 
   const match = cartItems.find((item) => item?.id === items?.id);
   const quantity = match?.qty || items?.quantity;
-
+  // console.log("quantity",items?.quantity);
 
   const DecreaseMutation = useMutation(
     {

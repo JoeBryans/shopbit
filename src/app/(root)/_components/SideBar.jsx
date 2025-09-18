@@ -19,7 +19,7 @@ const SideBar = async () => {
                     <div>
                         {data.map((item, index) => {
                             return (
-                                <Link key={index} href={`/category?category=${encodeURI(item.slug)}`}>
+                                <Link key={index} href={`/product/category?category=${encodeURI(item.slug)}`}>
                                     <SidebarMenuButton>
                                         {item.name}
                                     </SidebarMenuButton>

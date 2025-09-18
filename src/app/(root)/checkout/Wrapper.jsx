@@ -12,7 +12,7 @@ const Wrapper = ({children}) => {
     // if(isPayment){
 
     return (
-        <main className='max-w-6xl  my-14 w-full flex flex-wrap gap-4 items-start '>
+        <main className='max-w-6xl  my-14 w-full flex sm:flex-wrap flex-wrap-reverse gap-4 items-start '>
 
             <div className='max-w-2xl w-full mx-auto'>
                 {children}

@@ -8,7 +8,7 @@ import { Heart } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect } from 'react'
 import RelatedProducts from './RelatedProducts';
-import Qty from '@/components/Cart/Qty';
+import { AddButton } from '@/components/Cart/cartButton';
 
 const ProductCard = ({ product, relatedProducts }) => {
     const [imageIndex, setImageIndex] = React.useState(0);
@@ -124,7 +124,7 @@ const ProductCard = ({ product, relatedProducts }) => {
                         )}
 
                         {/* // qty */}
-                        <Qty items={product} />
+                        <AddButton items={product} />
 
                     </div>
                 </div>

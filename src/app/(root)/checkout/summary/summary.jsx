@@ -11,6 +11,7 @@ import { ItemsCard } from '../_components/Cards/ItemsCard'
 import { loadClientSecret } from '@/hooks/store/localstorage'
 import axios from 'axios'
 import { toast } from 'sonner'
+import Loader from '@/components/custom/Loader'
 async function GetCartItems() {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/cart`, {
@@ -44,48 +45,12 @@ const Summary = () => {
         return acc + Number(item.quantity) * Number(item.product.price);
     }, 0);
 
-    const paymentIntentId = loadClientSecret("paymentIntentId");
-
-    console.log(paymentIntentId);
-
-    const handleCheckOut = async () => {
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/order`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    items: cartItems,
-                    totalPrice: totalPrice,
-                    // totalquantity: ,
-                    shippingAddress: address,
-                    paymentMethod: paymentMethod?.name,
-                    paymentIntentId: paymentIntentId || null,
-                })
-            })
-            const data = await res.json();
-            if (res?.ok) {
-                toast.success(" Order placed successfully");
-                localStorage.setItem("clientSecret", data?.clientSecret);
-                localStorage.setItem("paymentIntentId", data?.paymentIntentId);
-                router.push("/checkout/pay");
-
-            } else {
-                toast.error("Something went wrong");
-            }
-
-        } catch (error) {
-            console.log(error);
-            toast.error(error);
-        }
-    };
 
 
 
 
     return (
-        <div className='w-full min-h-[100vh]  flex flex-col items-center '>
+        <div className='w-full flex flex-col items-center '>
             <div className=' bg-white w-full p-2  mx-auto text-gray-700'>  <AddressCard address={address} />
                 <PaymentMethodCard paymentMethod={paymentMethod} />
 
@@ -100,22 +65,7 @@ const Summary = () => {
                         })
                     ) : null}
                 </div>
-                <div className='w-full flex justify-end my-4'>
-                    <Button variant={"primary"}
-                        className={"disabled:bg-indigo-400 disabled:text-white"}
-                        disabled={cartItems?.length === 0 && !address && !paymentMethod}
-                        onClick={handleCheckOut}
 
-                    >
-                        <span className=' font-semibold text-sm'>Proceed to Checkout</span>
-                        {/* (
-              {
-                cart && cart?.length > 0 ? <Currency price={totalPrice}
-                  className={"text-xs line-clamp-1"}
-                /> : null
-              }) */}
-                    </Button>
-                </div>
             </div>
         </div>
     )

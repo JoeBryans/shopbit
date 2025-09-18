@@ -166,21 +166,25 @@ model Review {
 }
 
 model Order {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  total         Float
-  orderItems    OrderItem[]
-  userId        String?        @db.ObjectId
-  status        OrderStatus?   @default(PENDING)
-  user          User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  paymentStatus PaymentStatus? @default(PENDING)
-  payment       Payment[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  total           Float
+  orderItems      OrderItem[]
+  userId          String?        @db.ObjectId
+  status          OrderStatus?   @default(PENDING)
+  user            User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  paymentStatus   PaymentStatus? @default(PENDING)
+  payment         Payment[]
+  shippingAddress Json?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   @@index([userId])
   @@index([status])
   @@index([paymentStatus])
 }
+// shippingAddress{
+
+// }
 
 enum OrderStatus {
   PENDING
@@ -248,10 +252,11 @@ model Address {
 
 model Payment {
   id              String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId          String  @db.ObjectId
-  users           User    @relation(fields: [userId], references: [id])
-  payment         String?
-  payment_method  String?
+  userId          String?  @db.ObjectId
+  users           User?    @relation(fields: [userId], references: [id])
+  // payment         String?
+  metadata       Json?
+  paymentMethod  String?
   paymentIntentId String?
   status          String?
   amount          Int?
