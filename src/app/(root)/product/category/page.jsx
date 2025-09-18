@@ -13,7 +13,7 @@ const page = async ({ searchParams }) => {
     console.log("data", data);
     return (
         <div className='w-full min-h-[100vh] flex justify-between '>
-            <div className='flex h-full'>
+            <div className='flex h-full w-full overflow-auto scrollbar-hide'>
                 <SideBar />
                 <div className='md:hidden '>
                     <SidebarTrigger />

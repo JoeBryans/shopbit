@@ -9,7 +9,7 @@ const page = async () => {
         redirect("/sign-in")
     }
     return (
-        <div className='w-full '>
+        <div className='w-full place-items-center '>
             <ProfileCard />
         </div>
     )
