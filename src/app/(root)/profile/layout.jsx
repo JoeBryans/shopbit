@@ -4,9 +4,9 @@ import Sidebar from './_components/Sidebar'
 const layout = ({ children }) => {
     return (
         <div className='w-full   '>
-            <div className='w-max min-h-[100vh]  flex ju overflow-auto scrollbar-hide  '>
+            <div className='w-full min-h-[100vh]  flex ju overflow-auto scrollbar-hide  '>
                 <Sidebar />
-                <main className='ml-5'>
+                <main className='ml-5 w-full'>
                     {children}
 
                 </main>

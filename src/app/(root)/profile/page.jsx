@@ -1,21 +1,18 @@
-"use client"
 import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import {z} from 'zod'
-
-const schema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().min(10),
-  password: z.string().min(6),
-})
-const page = () => {
-  return (
-    <div>
-        
-    </div>
-  )
+import ProfileCard from './_components/ProfilCard'
+import { authOptions } from '@/auth'
+import { getServerSession } from 'next-auth'
+const page = async () => {
+    const session = await getServerSession(authOptions)
+    const user = session?.user
+    if (!user) {
+        redirect("/sign-in")
+    }
+    return (
+        <div className='w-full '>
+            <ProfileCard />
+        </div>
+    )
 }
 
 export default page

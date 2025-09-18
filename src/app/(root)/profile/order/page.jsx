@@ -29,7 +29,7 @@ const page = () => {
         {
             queryKey: ["orders"],
             queryFn: async () => {
-                const res = await fetch(`http://localhost:3000/api/order`)
+                const res = await fetch(`/api/order`)
                 const data = await res.json();
                 return data;
             },
