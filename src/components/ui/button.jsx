@@ -22,6 +22,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         primary:
           "bg-indigo-600 text-white shadow-xs hover:bg-indigo-700 dark:bg-gray-700  cursor-pointer",
+        warning: "cursor-pointer bg-orange-600 text-white hover:bg-white hover:text-orange-600  hover:border-orange-600  hover:border-2 font-semibold transition:all w-max",
         success:
           "bg-emerald-600 text-white shadow-xs hover:bg-emerald-700 dark:bg-gray-700  cursor-pointer",
       },

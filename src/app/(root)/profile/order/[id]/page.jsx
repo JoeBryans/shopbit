@@ -1,10 +1,11 @@
+import { Button } from '@/components/ui/button'
 import { headers } from 'next/headers'
 import Image from 'next/image'
 import React from 'react'
 
 const page = async ({ params }) => {
     const { id } = await params
-    const res = await fetch(`http://localhost:3000/api/order/${id}`,
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/order/${id}`,
         {
             method: "GET",
             headers: {
@@ -15,7 +16,7 @@ const page = async ({ params }) => {
     )
     const order = await res.json()
     return (
-        <div className='w-full'>
+        <div className='w-full mx-auto'>
             {
                 order && (
                     <div className="max-w-3xl w-full flex flex-col items-start gap-4 bg-gray-50 p-4 rounded-lg border-1 ">
@@ -27,7 +28,7 @@ const page = async ({ params }) => {
                             <span>Total itmes : {order?.orderItems?.length}</span>
                         </div>
 
-                        <div className='flex flex-col gap-4 max-w-md w-full border-1 rounded-lg p-4'>
+                        <div className='flex flex-col gap-4  w-full border-1 rounded-lg p-4'>
                             <h3 className='text-xl text-center font-semibold'>Order Items</h3>
                             {
                                 order?.orderItems?.map((item, index) => {
@@ -42,10 +43,15 @@ const page = async ({ params }) => {
                                                     className='w-full object-cover h-full'
                                                 />
                                             </div>
-                                            <div className='flex flex-col gap-2 '>
+                                            <div className='w-full flex flex-col gap-2 '>
                                                 <span className='line-clamp-1'>{item?.product?.name}</span>
                                                 <span>Quantity : {item?.quantity}</span>
-                                                <span>Price : {item?.price}</span>
+                                                <div className='flex items-center justify-between w-full'>
+                                                    <span>Price : {item?.price}</span>
+                                                    <Button variant={"warning"}>
+                                                        Add review
+                                                    </Button>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -56,7 +62,7 @@ const page = async ({ params }) => {
                         </div>
 
                         <div
-                            className='flex flex-col gap-4 max-w-md w-full border-1 p-4 rounded-lg'
+                            className='flex flex-col gap-4 w-full border-1 p-4 rounded-lg'
                         >
                             <h3 className='text-xl text-center font-semibold'>Payment</h3>
                             <div className='flex gap-2 items-center'>

@@ -201,7 +201,7 @@ export const RemoveButton = ({ items }) => {
   return (
     <Button
       size={"sm"}
-      className="cursor-pointer bg-orange-600  hover:bg-white hover:text-orange-600  hover:border-orange-600  hover:border-2 font-semibold transition:all w-max"
+     variant={"warning"}
       onClick={() => RemoveFromCart(items)}
     >
       Remove
