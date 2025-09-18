@@ -4,12 +4,14 @@ import { Button } from '@/components/ui/button'
 import { loadClientSecret } from '@/hooks/store/localstorage'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'sonner'
 const Summary = () => {
     const queryClient = useQueryClient()
     const { address, paymentMethod } = useSelector((state) => state.checkOut)
+    const router = useRouter()
     const [isLoading, setIsLoading] = React.useState(false)
     const { data: cart } = useQuery(
         {

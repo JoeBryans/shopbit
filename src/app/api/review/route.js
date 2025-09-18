@@ -3,40 +3,26 @@ import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-
 export async function POST(req) {
-    const { productId } = await req.json();
-    const { user } = await getServerSession(authOptions);
-    const userId = user?.id;
+    const { rating, comment, productId } = await req.json();
+    console.log("rating", rating);
+    console.log("comment", comment);
+    console.log("productId", productId);
+    
+    const session = await getServerSession(authOptions);
+    const userId = session?.user?.id;
     try {
         if (!userId) return null;
-        const existingWishlist = await prisma.wishlist.findUnique({
-            where: {
+        const review = await prisma.review.create({
+            data: {
                 productId: productId,
+                rating: rating,
+                comment: comment,
                 userId: userId,
             }
-        });
-        console.log("existingWishlist", existingWishlist);
-        if (existingWishlist) {
-            const wishlist = await prisma.wishlist.delete({
-                where: {
-                    id: existingWishlist.id,
-                },
-
-            });
-            return NextResponse.json({ wishlist, ok: true, message: "product removed from wishlist" });
-        } else {
-
-            const wishlist = await prisma.wishlist.create({
-                data: {
-                    productId: productId,
-                    userId: userId,
-                }
-            })
-            console.log("wishlist", wishlist);
-            return NextResponse.json({ wishlist, ok: true, message: "product added to wishlist" });
-        }
-
+        })
+        console.log("review", review);
+        return NextResponse.json(review);
     } catch (error) {
         console.log(error);
 
@@ -46,12 +32,11 @@ export async function POST(req) {
 
 
 export async function GET(req) {
-    const session = await getServerSession(authOptions);
-    const userId = session?.user?.id;
-    console.log("userId", userId);
+    const { user } = await getServerSession(authOptions);
+    const userId = user?.id;
     try {
         if (!userId) return NextResponse.json({ error: "User not found" });
-        const wishlist = await prisma.wishlist.findMany({
+        const reviews = await prisma.review.findMany({
             where: {
                 userId: userId,
             },
@@ -78,12 +63,11 @@ export async function GET(req) {
                 },
             }
         });
-        console.log("wishlist", wishlist);
+        console.log("reviews", reviews);
 
-        return NextResponse.json(wishlist);
+        return NextResponse.json(reviews);
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "something went wrong  ", error, ok: false, status: 500 });
     }
 }
-

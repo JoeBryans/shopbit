@@ -24,7 +24,7 @@ import {
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-const GetUser = ({ role }) => {
+const GetUser = () => {
   const { data, status } = useSession();
   const path = usePathname();
   const start = path.startsWith("/dashboard");
@@ -52,14 +52,14 @@ const GetUser = ({ role }) => {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <Link
-                href={"/customer/account"}
+                href={"/profile"}
                 className="hover:bg-gray-300 w-full cursor-pointer flex justify-between rounded p-2"
               >
                 Profile
                 <UserCheck size={18} />
               </Link>
 
-              {role === "seller" ? (
+              {user?.role !== "user" ? (
                 <>
                   {start ? (
                     <Link
@@ -82,7 +82,7 @@ const GetUser = ({ role }) => {
               ) : (
                 <>
                   <Link
-                    href={""}
+                    href={"/profile/order"}
                     className="hover:bg-gray-300 w-full cursor-pointer flex justify-between rounded p-2"
                   >
                     <span>Orders</span>
@@ -91,24 +91,24 @@ const GetUser = ({ role }) => {
                   </Link>
 
                   <Link
-                    href={""}
+                    href={"/profile/wishlist"}
                     className="hover:bg-gray-300 w-full cursor-pointer flex justify-between rounded p-2"
                   >
                     {" "}
-                    Favourite
+                    Wishlist
                     <Heart size={18} />
                   </Link>
                 </>
               )}
 
-              <Link
+              {/* <Link
                 href={""}
                 className="hover:bg-gray-300 w-full cursor-pointer flex justify-between rounded p-2"
               >
                 {" "}
                 Settings
                 <Settings size={18} />
-              </Link>
+              </Link> */}
 
               <SignOut />
             </DropdownMenuGroup>

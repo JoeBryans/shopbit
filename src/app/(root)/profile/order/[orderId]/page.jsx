@@ -1,11 +1,13 @@
+import Currency from '@/components/custom/currency'
 import { Button } from '@/components/ui/button'
 import { headers } from 'next/headers'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const page = async ({ params }) => {
-    const { id } = await params
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/order/${id}`,
+    const { orderId } = await params
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/order/${orderId}`,
         {
             method: "GET",
             headers: {
@@ -46,11 +48,14 @@ const page = async ({ params }) => {
                                             <div className='w-full flex flex-col gap-2 '>
                                                 <span className='line-clamp-1'>{item?.product?.name}</span>
                                                 <span>Quantity : {item?.quantity}</span>
-                                                <div className='flex items-center justify-between w-full'>
-                                                    <span>Price : {item?.price}</span>
-                                                    <Button variant={"warning"}>
-                                                        Add review
-                                                    </Button>
+                                                <div className='flex items-center justify-between flex-wrap w-full'>
+                                                    <span>Price :
+                                                        <Currency price={item?.price} />
+                                                    </span>
+                                                    <Link href={`/profile/reviews/${item?.product?.id}`} >
+                                                        <Button variant={"outline"}>
+                                                            Add review
+                                                        </Button>                                           </Link>
                                                 </div>
                                             </div>
 

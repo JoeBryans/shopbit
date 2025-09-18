@@ -195,6 +195,7 @@ export const RemoveButton = ({ items }) => {
           productId: item?.productId,
           id: item?.id,
         }
+        
       );
     }
   };
