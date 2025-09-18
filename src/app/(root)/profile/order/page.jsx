@@ -9,19 +9,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
-const Date = ({ date }) => {
-    const setDate = date.toLocaleString("en-NG", {
-        weekday: 'long', // "numeric", "2-digit"
-        year: 'numeric', // "numeric", "2-digit"
-        month: 'long', // "numeric", "2-digit", "narrow", "short", "long"
-        day: 'numeric', // "numeric", "2-digit"
-    }
+// const Date = ({ date }) => {
+//     const setDate = date.toLocaleString("en-NG", {
+//         weekday: 'long', // "numeric", "2-digit"
+//         year: 'numeric', // "numeric", "2-digit"
+//         month: 'long', // "numeric", "2-digit", "narrow", "short", "long"
+//         day: 'numeric', // "numeric", "2-digit"
+//     }
 
-    )
-    console.log(setDate);
+//     )
+//     console.log(setDate);
 
-    return setDate
-}
+//     return setDate
+// }
 const page = () => {
 
     const queryClient = new QueryClient();
