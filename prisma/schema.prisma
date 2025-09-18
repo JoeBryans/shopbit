@@ -29,6 +29,7 @@ model User {
   sessions    Session[]
   cartItems   CartItems[]
   orders      Order[]
+  wishlist    Wishlist[]
   address     Address[]
   payment     Payment[]
   recentViews RecentView[]
@@ -98,6 +99,7 @@ model Product {
   cartItems      CartItems[]
   orderItems     OrderItem[]
   deals          Deals[]
+  wishlist       Wishlist[]
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   userId         String           @db.ObjectId
@@ -141,6 +143,16 @@ model Deals {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String   @unique @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Wishlist {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String   @unique @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

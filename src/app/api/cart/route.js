@@ -93,7 +93,11 @@ export async function GET(req) {
                         },
                     }
                 }
-            }
+
+            },
+            // orderBy: {
+            //     createdAt: 'desc',
+            // }
         });
         return NextResponse.json(cart);
     } catch (error) {
@@ -179,6 +183,6 @@ export async function DELETE(req) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "something went wrong  ", error: error, ok: false, status: 500 });
-    }   
-    
+    }
+
 }

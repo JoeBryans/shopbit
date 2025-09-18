@@ -1,8 +1,8 @@
 import { AddButton } from '@/components/Cart/cartButton'
 import Currency from '@/components/custom/currency'
+import Wishlist from '@/components/custom/wishlist'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { HeartIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -19,7 +19,8 @@ const ProductsCard = ({ products }) => {
                                     className='w-full  object-cover
                                                            group-hover:scale-105 transition-all duration-200 ease-in-out rounded-lg'
                                 />
-                                <HeartIcon className='absolute top-3 right-1 text-red-500 hover:text-white' size={30} />
+                                <Wishlist product={product} />
+                                {/* <HeartIcon className='absolute top-3 right-1 text-red-500 hover:text-white' size={30} /> */}
                             </div>
                             <div className='text-gray-600 mt-2 flex flex-col gap-2 px-4 mb-5'>
                                 <p className="text-sm font-semibold  ">{product?.category?.name}</p>

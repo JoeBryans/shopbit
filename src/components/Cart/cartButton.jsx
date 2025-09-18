@@ -277,15 +277,3 @@ export const CheckOutButton = ({
   );
 };
 
-// export const AddAddress = ({ items }: props) => {
-
-//   return (
-//     <Button
-//       size={"sm"}
-//       className="bg-blue-500 hover:bg-white hover:text-blue-500 hover:border-blue-500 hover:border-2 font-semibold transition:all w-full"
-//       onClick={() => AddShippinAddress(items)}
-//     >
-//       create
-//     </Button>
-//   );
-// };

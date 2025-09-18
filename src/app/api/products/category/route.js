@@ -42,6 +42,12 @@ export async function GET(req) {
                             slug: true
                         }
 
+                    },
+                    wishlist: {
+                        select: {
+                            id: true,
+                            productId: true,
+                        }
                     }
                 },
                 orderBy: {

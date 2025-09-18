@@ -145,6 +145,12 @@ export async function GET(req) {
                     }
 
                 },
+                wishlist: {
+                    select: {
+                        id: true,
+                        productId: true,
+                    }
+                }
             },
             orderBy: {
                 createdAt: 'desc',
@@ -182,6 +188,12 @@ export async function GET(req) {
                     }
 
                 },
+                wishlist: {
+                    select: {
+                        id: true,
+                        productId: true,
+                    }
+                }
             },
             orderBy: {
                 createdAt: 'desc',
@@ -219,6 +231,12 @@ export async function GET(req) {
                     }
 
                 },
+                wishlist: {
+                    select: {
+                        id: true,
+                        productId: true,
+                    }
+                }
             },
             orderBy: {
                 createdAt: 'desc',
@@ -256,6 +274,12 @@ export async function GET(req) {
                     }
 
                 },
+                wishlist: {
+                    select: {
+                        id: true,
+                        productId: true,
+                    }
+                }
             },
             orderBy: {
                 createdAt: 'desc',
@@ -293,6 +317,12 @@ export async function GET(req) {
                     }
 
                 },
+                wishlist: {
+                    select: {
+                        id: true,
+                        productId: true,
+                    }
+                }
             },
             orderBy: {
                 createdAt: 'desc',
@@ -329,6 +359,12 @@ export async function GET(req) {
                     }
 
                 },
+                wishlist: {
+                    select: {
+                        id: true,
+                        productId: true,
+                    }
+                }
             },
             orderBy: {
                 createdAt: 'desc',
