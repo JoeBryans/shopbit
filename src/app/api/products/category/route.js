@@ -48,7 +48,8 @@ export async function GET(req) {
                             id: true,
                             productId: true,
                         }
-                    }
+                    },
+                    review: true
                 },
                 orderBy: {
                     createdAt: 'desc',
