@@ -5,7 +5,7 @@ import Image from 'next/image';
 import React from 'react'
 
 const page = async () => {
-    const res = await fetch(`http://localhost:3000/api/wishlist`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/wishlist`, {
         method: "GET",
         headers: {
             Cookie: (await headers()).get('cookie') || "",
