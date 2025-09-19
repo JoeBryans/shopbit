@@ -4,7 +4,7 @@ import { Facebook, Instagram, LinkedinIcon, Twitter } from "lucide-react";
 const Footer = () => {
   // bg-[#BA68C8]
   return (
-    <div className=" bg-[#245A95] w-screen min-h-20 z-50  text-slate-50">
+    <div className=" bg-[#212529] w-screen min-h-20 z-50  text-slate-50">
       <div className="max-w-[80rem]  w-[90%] flex flex-col mx-auto mt-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4">
           <div>

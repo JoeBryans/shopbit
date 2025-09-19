@@ -90,7 +90,7 @@ export const AddButton = ({ items }) => {
     }
   )
 
-  const filterCart = cart?.filter((item) => item?.productId === items?.id);
+  const filterCart = cart?.length > 0 && cart?.filter((item) => item?.productId === items?.id);
 
   const mutation = useMutation(
     {
@@ -195,14 +195,14 @@ export const RemoveButton = ({ items }) => {
           productId: item?.productId,
           id: item?.id,
         }
-        
+
       );
     }
   };
   return (
     <Button
       size={"sm"}
-     variant={"warning"}
+      variant={"warning"}
       onClick={() => RemoveFromCart(items)}
     >
       Remove

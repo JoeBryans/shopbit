@@ -47,9 +47,9 @@ const Navigator = () => {
               <li className="flex items-center gap-2 ">
                 <Searchs />
               </li>
-              <li className="flex items-center gap-2   ">
+              {/* <li className="flex items-center gap-2   ">
                 <AiIcons.AiOutlineHeart size={20} className="cursor-pointer " />
-              </li>
+              </li> */}
               <li className="flex items-center gap-2 relative">
                 <CartBar />
               </li>

@@ -4,17 +4,18 @@ import { QueryClient, QueryClientProvider as ReactQueryClientProvider } from '@t
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const QueryClientProviders = ({ children }) => {
-    const [isOpen, setIsOpen] = React.useState(false)
+    // const [isOpen, setIsOpen] = React.useState(false)
 
     const queryClient = new QueryClient()
 
     return <ReactQueryClientProvider client={queryClient}
 
     >
-        <button onClick={() => setIsOpen(!isOpen)}>Toggle Devtools</button>
+        {/* <button onClick={() => setIsOpen(!isOpen)}>Toggle Devtools</button>
+         */}
         {children}
 
-        <ReactQueryDevtools initialIsOpen={false} isOpen={isOpen} client={queryClient} />
+        {/* <ReactQueryDevtools initialIsOpen={false} isOpen={isOpen} client={queryClient} /> */}
     </ReactQueryClientProvider>
 }
 

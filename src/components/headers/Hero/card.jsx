@@ -12,7 +12,12 @@ import {
 } from "../../ui/carousel"
 import Image from "next/image"
 const images = [
+    // "81rHmJC38KL.mp4",
+    // "/51n+dCiIGZL._SR3000,600_.jpg",
+    "/81qc2sntHJL._SX3000_.jpg",
     "/71xHyqBwdcL._SX3000_.jpg",
+    "/71ivVapAFuL._SX3000_.jpg",
+    "/616q7TVyV6L._SX3000_.jpg",
     "/81hIlE5xocL._SX3000_.jpg",
     "/619geyiQI5L._SX3000_.jpg",
     "/61Yx5-N155L._SX3000_.jpg",
@@ -36,13 +41,13 @@ export default function CardCarousel() {
                         <div className="p-1 w-full max-h-[100vh]">
                             <Image src={_} alt="product" width={1000} height={1000}
                                 priority={true}
-                                className="w-full object-cover rounded-md"
+                                className="w-full h-full object-cover rounded-md"
                             />
                         </div>
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <div className="absolute mx-auto w-[90%] bg-amber-400 top-[50%] flex justify-between items-center">
+            <div className="w-72 absolute mx-auto  bg-amber-400 top-[80%] flex justify-between items-center">
 
                 <CarouselPrevious />
                 <CarouselNext />

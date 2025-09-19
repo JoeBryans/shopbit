@@ -10,7 +10,6 @@ const page = async ({ params }) => {
     const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/category?category=${encodeURI(data?.category?.name)}`, { next: { revalidate: 10 } })
     const relatedProducts = await relatedRes.json()
 
-    console.log(id);
     return (
         <div>
             <ProductCard product={data} relatedProducts={relatedProducts} />

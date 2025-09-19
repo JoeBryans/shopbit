@@ -1,6 +1,7 @@
 import Hero from "@/components/headers/Hero/Hero";
 import PopularCard from "./(root)/_components/product/PopularCard";
 import { Suspense } from "react";
+import Loading from "./Loading";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
     <Hero/>
    </div>
    <main className=" w-full max-w-8xl mx-auto px-3 md:px-6  my-10">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading/>}>
           <PopularCard />
 
         </Suspense>

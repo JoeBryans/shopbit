@@ -1,4 +1,5 @@
-// import { Button } from "../ui/button";
+"use client";
+import Link from "next/link";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +10,12 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
-// import { Label } from "../ui/label";
 import { Search, SearchIcon } from "lucide-react";
+import { useState } from "react";
 
 export default function Searchs() {
+  const [search, setSearch] = useState("");
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -27,8 +30,12 @@ export default function Searchs() {
             id="search"
             placeholder="search..."
             className="col-span-3 font-semibold "
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <Search size={30} className="cursor-pointer " />
+          <Link href={`/product?q=${encodeURI(search)}`}>
+            <Search size={30} className="cursor-pointer "
+            /></Link>
         </div>
       </DialogContent>
     </Dialog>
