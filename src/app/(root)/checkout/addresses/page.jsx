@@ -9,7 +9,6 @@ const page = async () => {
     })
 
     const address = await res.json();
-    console.log("address :", address);
 
     return (
         <div className='w-full min-h-[100vh]  flex flex-col items-center '>

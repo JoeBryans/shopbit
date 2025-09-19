@@ -23,7 +23,6 @@ const schema = yup.object({
 })
 
 async function ProfileImage(image) {
-    console.log(image)
 
     try {
         const res = await fetch("/api/user", {

@@ -9,7 +9,6 @@ const page = async () => {
         }
     })
     const data = await res.json()
-    console.log(data)
     return (
         <div className='w-full mx-auto mt-10'>
             <div className='max-w-2xl w-full flex flex-col items-center justify-center'>

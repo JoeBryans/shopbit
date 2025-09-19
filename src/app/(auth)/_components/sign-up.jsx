@@ -85,7 +85,6 @@ const SignUp = () => {
       message: "Password must contain at least one special character",
     },
   ];
-  console.log(image);
 
   const router = useRouter();
   const {

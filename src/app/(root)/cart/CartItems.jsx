@@ -7,10 +7,8 @@ export const UnSignedInUserCartCard = ({ CartItems }) => {
   // const num = Math.round(Items?.rating);
   // const rate = new Array(num).fill(1);
   const rate = [1, 2, 3, 4, 5].fill(0);
-  console.log("quantity", CartItems);
 
   const items = CartItems;
-  console.log("Items", items);
 
   const price = items?.price;
   const totalPrice = items?.qty * price;

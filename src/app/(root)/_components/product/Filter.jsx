@@ -5,14 +5,12 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { cn } from '@/lib/utils'
-import { Check, Minus, Plus, Star } from 'lucide-react'
+import {  Minus, Plus, Star } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { DualRangeSlider } from '@/components/ui/dualrangslider'
-import { set } from 'zod'
 const FilleStar = ({ star }) => {
     const num = Math.round(star);
     const rate = new Array(num).fill(0);
-    console.log(" rate", rate);
 
     return (
         <div className="flex items-center gap-2 ">{

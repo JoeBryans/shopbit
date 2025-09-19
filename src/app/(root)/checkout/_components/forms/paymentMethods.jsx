@@ -30,7 +30,6 @@ const paymentMethods = [
 const PaymentMethods = ({ paymentMethod }) => {
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
     const dispatch = useDispatch()
-    console.log("paymentMethod", selectedPaymentMethod);
 
     return (
         <div className=' bg-white w-full p-4  mx-auto text-gray-700'>

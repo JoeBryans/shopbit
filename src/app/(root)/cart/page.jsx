@@ -42,7 +42,6 @@ const page = () => {
   useEffect(() => {
     if (user?.user && cartItems?.length > 0) {
       for (const item of cartItems) {
-        console.log("item:", item);
 
         async function PostCart() {
 

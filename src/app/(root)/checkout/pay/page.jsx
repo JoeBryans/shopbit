@@ -11,7 +11,6 @@ const stripePromise = loadStripe(
 const page = () => {
   const router = useRouter();
   const clientSecret = loadClientSecret("clientSecret");
-  console.log(" clientSecret", clientSecret);
   if (clientSecret === undefined) {
     router.push("/checkout/summary");
   }

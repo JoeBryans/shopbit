@@ -34,7 +34,6 @@ export function CartBar() {
       // enabled: address && paymentMethod,
     }
   )
-  console.log("cartbar", cart);
 
 
   // const total = cartItems.reduce((acc, item) => acc + item.qty, 0);

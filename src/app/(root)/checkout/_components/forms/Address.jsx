@@ -29,10 +29,6 @@ const addressSchema = z.object({
     additionalInfo: z.string(),
 })
 async function PostAddress({ data }) {
-    console.log(
-        "data",
-        data
-    )
 
     try {
         const res = await fetch("/api/address", {
@@ -94,7 +90,6 @@ const Address = () => {
     const [state, setState] = useState([]);
     const [city, setCity] = useState([]);
     const [address, setAddress] = useState([]);
-    console.log("address", address);
 
     // get countries
     const countryData = Country.getAllCountries().map(city => ({
@@ -118,15 +113,12 @@ const Address = () => {
 
 
             if (selectedState) {
-                console.log("selectedCountry", country);
 
                 const states = state.filter(item => item.value === selectedState)
-                console.log("state :", state);
                 const cityData = City.getCitiesOfState(country[0]?.countryCode, states[0]?.stateCode).map(city => ({
                     value: city.name,
                     displayValue: city.name,
                 }))
-                console.log("cityData", cityData);
 
                 setCity(cityData)
             }
