@@ -176,7 +176,7 @@ const ProfileCard = () => {
     };
     return (
         <div className='w-full mt-10'>
-            <Card className=" max-w-2xl w-full h-max text-gray-800 rounded-lg border-1 px-4">
+            <Card className=" max-w-2xl w-full h-max text-gray-800 rounded-lg border-1 px-4 mx-auto">
                 <CardHeader className="w-full flex items-center justify-center">
                     {/* <span className="text-2xl font-semibold"> Profile</span> */}
                 </CardHeader>

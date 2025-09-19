@@ -21,7 +21,7 @@ const page = async ({ params }) => {
         <div className='w-full mx-auto'>
             {
                 order && (
-                    <div className="max-w-3xl w-full flex flex-col items-start gap-4 bg-gray-50 p-4 rounded-lg border-1 ">
+                    <div className="max-w-3xl w-full flex flex-col items-start mx-auto gap-4 bg-gray-50 p-4 rounded-lg border-1 ">
 
                         <div className='bg-white flex flex-col gap-2 py-2 px-4 rounded-lg text-gray-600 w-full'>
                             <span>Order : {order.id}</span>

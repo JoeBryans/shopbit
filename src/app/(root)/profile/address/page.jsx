@@ -11,7 +11,7 @@ const page = async () => {
     const data = await res.json()
     return (
         <div className='w-full mx-auto mt-10'>
-            <div className='max-w-2xl w-full flex flex-col items-center justify-center'>
+            <div className='max-w-2xl w-full flex flex-col items-center justify-center mx-auto'>
                 <h3 className='text-xl font-semibold text-gray-700 mb-4'>Your Address</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2  gap-4 ">
                     {
