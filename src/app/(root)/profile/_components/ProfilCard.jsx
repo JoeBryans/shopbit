@@ -100,7 +100,6 @@ const ProfileCard = () => {
             queryFn: async () => {
                 const res = await fetch("/api/user")
                 const data = await res.json();
-                console.log("data", data);
 
                 return data;
             },
@@ -234,8 +233,8 @@ const ProfileCard = () => {
                                                         onClick={UploadImage}
                                                     >
                                                         {
-                                                            uploadImageMutation.isLoading ? <Loader isLoading={uploadImageMutation.isLoading} /> : 
-                                                        <span className="text-sm">Upload Image</span>
+                                                            uploadImageMutation.isLoading ? <Loader isLoading={uploadImageMutation.isLoading} /> :
+                                                                <span className="text-sm">Upload Image</span>
                                                         }
                                                     </Button>
                                                 </DialogClose>
