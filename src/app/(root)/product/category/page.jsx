@@ -19,7 +19,9 @@ const page = async ({ searchParams }) => {
     return (
         <div className='w-full min-h-[100vh] flex justify-between overflow-auto scrollbar-hide '>
             <div className='flex h-full '>
-                <Filter />
+                <div className='w-64 h-full'>
+                    <Filter />
+                </div>
                 <div className='md:hidden z-30'>
                     <SidebarTrigger />
                 </div>
