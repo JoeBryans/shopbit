@@ -51,7 +51,12 @@ const Summary = () => {
 
     return (
         <div className='w-full flex flex-col items-center '>
-            <div className=' bg-white w-full p-2  mx-auto text-gray-700'>  <AddressCard address={address} />
+            
+            <div className=' bg-white w-full p-2  mx-auto text-gray-700'>
+                
+                
+
+                  <AddressCard address={address} />
                 <PaymentMethodCard paymentMethod={paymentMethod} />
 
                 <div className='max-w-xl w-full rounded-xl border-1 bg-white'>

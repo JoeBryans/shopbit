@@ -9,19 +9,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
-// const Date = ({ date }) => {
-//     const setDate = date.toLocaleString("en-NG", {
-//         weekday: 'long', // "numeric", "2-digit"
-//         year: 'numeric', // "numeric", "2-digit"
-//         month: 'long', // "numeric", "2-digit", "narrow", "short", "long"
-//         day: 'numeric', // "numeric", "2-digit"
-//     }
+const Date = ({ date }) => {
+    const setDate = date.toLocaleString("en-NG", {
+        weekday: 'long', // "numeric", "2-digit"
+        year: 'numeric', // "numeric", "2-digit"
+        month: 'long', // "numeric", "2-digit", "narrow", "short", "long"
+        day: 'numeric', // "numeric", "2-digit"
+    }
 
-//     )
-//     console.log(setDate);
+    )
+    // console.log(setDate);
 
-//     return setDate
-// }
+    return setDate
+}
 const page = () => {
 
     const queryClient = new QueryClient();
@@ -42,8 +42,9 @@ const page = () => {
 
 
     return (
-        <div>
+        <div className='w-full'>
             <div className=' w-max p-4 space-y-4   mx-auto'>
+                <h1 className="text-2xl font-bold mb-5">You Orders</h1>
                 {
                     orders?.length > 0 && (orders.map((order, index) => {
                         return (

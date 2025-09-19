@@ -14,6 +14,7 @@ const page = async () => {
     const wishList = await res?.json();
     return (
         <div className='w-full min-h-[100vh]  flex flex-col items-center mt-10'>
+            <h1 className="text-2xl font-bold mb-5 -m-t-5 ">Saved Products</h1>
             <div className='max-w-2xl w-full p-4  mx-auto border-1 rounded-lg'>
                 {
                     wishList && (

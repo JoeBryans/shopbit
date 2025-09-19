@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Loading from './Loading';
+import { Card } from '@/components/ui/card';
 
 
 
@@ -81,13 +82,16 @@ const page = () => {
     }
   }, [cartItems, user?.user])
 
- if (isLoading) {
+  if (isLoading) {
     return <Loading />
   }
 
   if (user) {
     return (
       <div className='w-full min-h-[100vh]  flex flex-col items-center '>
+
+        <h1 className="text-2xl font-bold mt-5">Your Cart</h1>
+
         <div className='max-w-6xl  my-14 w-full flex flex-wrap gap-4 items-start '>
           <div className='max-w-2xl w-full p-4 bg-white  mx-auto'>
             {cart && cart.length > 0 ? (
@@ -101,7 +105,20 @@ const page = () => {
 
 
               })
-            ) : null}
+            ) : <div>
+              <Card className="w-full h-full">
+                <div className="flex flex-col items-center justify-center">
+                  <h1 className="text-2xl font-bold">Your Cart is Empty</h1>
+                  <p className="text-gray-700 text-sm">
+                    You haven't added any product to your cart
+                  </p>
+                  <Link href={"/product"} className="text-blue-500 font-semibold">
+                    Shop Now
+                  </Link>
+                </div>
+              </Card>
+            </div>
+            }
           </div>
 
           {/* cart summary */}

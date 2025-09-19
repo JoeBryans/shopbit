@@ -121,6 +121,7 @@ const AddReview = () => {
 
     return (
         <div className='  w-full p-4  mx-auto text-gray-700'>
+            <h1 className="text-2xl font-bold mb-5 -m-t-5 ">Write  Review for this Product</h1>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

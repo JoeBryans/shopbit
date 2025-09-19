@@ -14,6 +14,8 @@ const paage = async () => {
 
   return (
     <div className='w-full   flex flex-col items-center '>
+      <h1 className="text-2xl font-bold mb-5 -m-t-5 ">Delivery Summary</h1>
+
       <Summary />
     </div>
   )
